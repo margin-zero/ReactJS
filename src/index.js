@@ -87,7 +87,7 @@ class Square extends React.Component {
 
   ReactDOM.render(
     <div>
-    <Game /><ShoppingList name="Alejandro" />
+    <Game /><ShoppingList name="Alejandro Rodrigo Municipio Hernandez" />
     </div>,
     document.getElementById('root')
   );
