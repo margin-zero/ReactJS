@@ -139,22 +139,12 @@ function Square(props) {
 
 // =====================================
 
-
-
   ReactDOM.render(
     <Game />,
     document.getElementById('root')
   );
 
-  ReactDOM.render(
-    <div>
-    <Game /><ShoppingList name="Alejandro Rodrigo Municipio Hernandez 2" />
-    </div>,
-    document.getElementById('root')
-  );
-
   // ====================================
-
 
   function calculateWinner(squares) {
     const lines = [
