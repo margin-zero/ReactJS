@@ -9,6 +9,9 @@
 # production
 /build
 
+# tic-tac-toe demo
+/app_demo_tic_tac_toe
+
 # misc
 .DS_Store
 .env.local
