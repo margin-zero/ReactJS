@@ -1,0 +1,15 @@
+.board-row {
+    width: 240px;
+    height: 60px;
+}
+
+.board-square {
+    box-sizing: border-box;
+    width: 60px;
+    height: 60px;
+    float: left;
+    background: yellow;
+    border: solid 1px black;
+    text-align: center;
+    line-height: 60px;
+}
