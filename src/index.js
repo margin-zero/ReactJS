@@ -25,11 +25,54 @@ class Game extends React.Component {
             }
         }
 
+        handleClick(i) {
+            const newSquares = this.state.squares.slice();
+            const neighbours = [
+                [1,4],
+                [0,2,5],
+                [1,3,6],
+                [2,7],
+                [0,5,8],
+                [1,4,6,9],
+                [2,5,7,10],
+                [3,6,11],
+                [4,9,12],
+                [5,8,10,13],
+                [6,9,11,14],
+                [7,10,15],
+                [8,13],
+                [9,12,14],
+                [10,13,15],
+                [11,14]
+            ];
+            
+            let current = neighbours[i];
+            let canMove = false;
+            let moveTo = i;
+
+            for (let j = 0; j < current.length; j++) {
+                if (!this.state.squares[current[j]]) { 
+                    canMove = true;
+                    moveTo = current[j];
+                }
+            }
+
+            if (canMove) {
+                newSquares[moveTo] = newSquares[i];
+                newSquares[i] = null;
+
+                this.setState({ squares: newSquares });
+            }
+        }
+
         render() { 
             const squares = this.state.squares;
 
             return (
-                <Board squares={squares} />
+                <Board 
+                squares={squares} 
+                onClick={(i) => this.handleClick(i)}
+                />
             )
         }
     
@@ -73,6 +116,7 @@ class Board extends React.Component {
         return (
             <Square
                 value={this.props.squares[i]} 
+                onClick={() => this.props.onClick(i)}
             />
         )
     }
@@ -85,7 +129,9 @@ class Board extends React.Component {
 
 function Square(props) {
     return (
-       <div className="board-square">{props.value}</div>
+       <div className="board-square"  onClick={props.onClick}>
+        {props.value}
+        </div>
     );
   }
 
