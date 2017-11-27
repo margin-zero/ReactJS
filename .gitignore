@@ -12,6 +12,10 @@
 # tic-tac-toe demo
 /app_demo_tic_tac_toe
 
+# gitignore folder
+/gitignore
+
+
 # misc
 .DS_Store
 .env.local

@@ -2,6 +2,40 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
+class Game extends React.Component {
+    
+        constructor(props) {
+            super(props);
+            this.state = {
+                squares: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,null]
+            };
+            this.scramble();
+        }
+    
+        scramble() {
+            var i;
+            for (i=0;i<100;i++) {
+                let sq1 = getRandomInt(0,15);
+                let sq2 = getRandomInt(0,15);
+
+                let tmp = this.state.squares[sq1];
+                this.state.squares[sq1] = this.state.squares[sq2];
+                this.state.squares[sq2] = tmp;
+            }
+        }
+
+        render() { 
+            const squares = this.state.squares;
+
+            return (
+                <Board squares={squares} />
+            )
+        }
+    
+    }
+
+
 class Board extends React.Component {
 
     render() {
@@ -33,25 +67,31 @@ class Board extends React.Component {
             </div>
           </div>
         );
-    }
+    } 
 
     renderSquare(i) {
         return (
-            <div className="board-square">{i+1}</div>
+            <Square
+                value={this.props.squares[i]} 
+            />
         )
     }
 }
 
 
 
-class Game extends React.Component {
 
-    render() { 
-        return (
-            <Board />
-        )
-    }
 
+
+function Square(props) {
+    return (
+       <div className="board-square">{props.value}</div>
+    );
+  }
+
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // =====================================
