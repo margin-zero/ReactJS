@@ -8,7 +8,8 @@ class Game extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
-                squares: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,null]
+                squares: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,null],
+                solved: false
             };
             this.scramble();
         }
@@ -57,11 +58,18 @@ class Game extends React.Component {
                 }
             }
 
-            if (canMove) {
+            if (canMove && !this.state.solved) {
                 newSquares[moveTo] = newSquares[i];
                 newSquares[i] = null;
-
                 this.setState({ squares: newSquares });
+
+                let solvedPieces = 0;
+
+                for (let j = 0; j <= 14; j++) {
+                    if (newSquares[j] === j+1) { solvedPieces++; }
+                }
+
+                if (solvedPieces === 15) { this.setState({solved : true});}
             }
         }
 
