@@ -66,14 +66,15 @@ class Game extends React.Component {
         render() { 
             const squares = this.state.squares;
             var status = "";
-            if (this.state.solved) { status = "Brawo - piętnastka ułożona";}
+            if (this.state.solved) { status = "Gratulacje - piętnastka ułożona.";}
             return (
-                <div>
-                <Board 
-                squares={squares} 
-                onClick={(i) => this.handleClick(i)}
-                />
-                <p>{status}</p>
+                <div class="game-table">
+                    <h1 className="game-name">Piętnastka</h1>
+                    <Board 
+                    squares={squares} 
+                    onClick={(i) => this.handleClick(i)}
+                    />
+                    <p className="status-text">{status}</p>
                 </div>
             )
         }
