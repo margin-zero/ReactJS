@@ -1,15 +1,24 @@
 .board-row {
-    width: 240px;
-    height: 60px;
+    width: 336px;
+    height: 84px;
 }
 
 .board-square {
+
+    background: #e8e8e8;
+    border: solid 2px #999999;
+    border-radius: 8px;
+
     box-sizing: border-box;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
+    margin: 2px;
+
+
     float: left;
-    background: yellow;
-    border: solid 1px black;
     text-align: center;
-    line-height: 60px;
+    line-height: 80px;
+
+    font-size: 36px;
+    color: rgba(0,0,0,0.9);
 }

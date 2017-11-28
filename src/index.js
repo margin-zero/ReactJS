@@ -14,38 +14,28 @@ class Game extends React.Component {
             this.scramble();
         }
     
-        scramble() {
-            var i;
-            for (i=0;i<100;i++) {
-                let sq1 = getRandomInt(0,15);
-                let sq2 = getRandomInt(0,15);
 
-                let tmp = this.state.squares[sq1];
-                this.state.squares[sq1] = this.state.squares[sq2];
-                this.state.squares[sq2] = tmp;
+        // scramble() "miesza" planszę przez symulowanie losowych przesunięć klocków.
+        // Dzięki temu unikamy sytuacji, w której planszy nie da się ułożyć
+
+        scramble() {
+            const neighbours = getNeighbourArray(); // odczytujemy tablicę sąsiedztw
+            var i = 15; // pozycja pustego miejsca na ułożonej planszy
+
+            for (let j = 1; j <= 200; j++ ) {
+                let neighbourCount = neighbours[i].length; // ustalamy ilość sąsiadów
+                let moveFrom = neighbours[i][getRandomInt(0,neighbourCount-1)]; // ustalamy który klocek przesuniemy
+                
+                this.state.squares[i] = this.state.squares[moveFrom]; // w "puste miejsce" przesuwamy ustalony klocek
+                this.state.squares[moveFrom] = null; // w miejscu przesuniętego klocka wstawiamy "null" - tu będzie teraz "puste miejsce"
+                i = moveFrom; // nowa pozycja pustego miejsca na planszy
             }
         }
+        
 
         handleClick(i) {
             const newSquares = this.state.squares.slice();
-            const neighbours = [
-                [1,4],
-                [0,2,5],
-                [1,3,6],
-                [2,7],
-                [0,5,8],
-                [1,4,6,9],
-                [2,5,7,10],
-                [3,6,11],
-                [4,9,12],
-                [5,8,10,13],
-                [6,9,11,14],
-                [7,10,15],
-                [8,13],
-                [9,12,14],
-                [10,13,15],
-                [11,14]
-            ];
+            const neighbours = getNeighbourArray();
             
             let current = neighbours[i];
             let canMove = false;
@@ -75,12 +65,16 @@ class Game extends React.Component {
 
         render() { 
             const squares = this.state.squares;
-
+            var status = "";
+            if (this.state.solved) { status = "Brawo - piętnastka ułożona";}
             return (
+                <div>
                 <Board 
                 squares={squares} 
                 onClick={(i) => this.handleClick(i)}
                 />
+                <p>{status}</p>
+                </div>
             )
         }
     
@@ -142,6 +136,28 @@ function Square(props) {
         </div>
     );
   }
+
+function getNeighbourArray() {
+    return [
+        [1,4],
+        [0,2,5],
+        [1,3,6],
+        [2,7],
+        [0,5,8],
+        [1,4,6,9],
+        [2,5,7,10],
+        [3,6,11],
+        [4,9,12],
+        [5,8,10,13],
+        [6,9,11,14],
+        [7,10,15],
+        [8,13],
+        [9,12,14],
+        [10,13,15],
+        [11,14]
+    ];
+}
+
 
 
 function getRandomInt(min, max) {
