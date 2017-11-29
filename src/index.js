@@ -8,59 +8,68 @@ class Game extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
-                squares: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,null],
+                squares: this.scramble([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,null]),
                 solved: false
             };
-            this.scramble();
         }
-    
 
         // scramble() "miesza" planszę przez symulowanie losowych przesunięć klocków.
         // Dzięki temu unikamy sytuacji, w której planszy nie da się ułożyć
 
-        scramble() {
+        scramble(squares) {
             const neighbours = getNeighbourArray(); // odczytujemy tablicę sąsiedztw
             var i = 15; // pozycja pustego miejsca na ułożonej planszy
 
             for (let j = 1; j <= 200; j++ ) {
-                let neighbourCount = neighbours[i].length; // ustalamy ilość sąsiadów
+                let neighbourCount = neighbours[i].length; // ustalamy ilość sąsiadów "pustego" miejsca
                 let moveFrom = neighbours[i][getRandomInt(0,neighbourCount-1)]; // ustalamy który klocek przesuniemy
                 
-                this.state.squares[i] = this.state.squares[moveFrom]; // w "puste miejsce" przesuwamy ustalony klocek
-                this.state.squares[moveFrom] = null; // w miejscu przesuniętego klocka wstawiamy "null" - tu będzie teraz "puste miejsce"
+                squares[i] = squares[moveFrom]; // w "puste" miejsce przesuwamy ustalony klocek
+                squares[moveFrom] = null; // w miejscu przesuniętego klocka wstawiamy "null" - tu będzie teraz "puste" miejsce
                 i = moveFrom; // nowa pozycja pustego miejsca na planszy
             }
+
+            return squares;
         }
         
-
         handleClick(i) {
             const newSquares = this.state.squares.slice();
+            let moveTo = this.canMove(i); // null === nie można przesunąć, !null === numer pola, na które można przesunąć
+
+            // jeśli można przesunąć (moveTo != null) i jeszcze nie jest ułożone (!this.state.solved)
+            if ((moveTo != null)  && !this.state.solved) {
+                newSquares[moveTo] = newSquares[i];
+                newSquares[i] = null;
+                this.setState({ squares: newSquares });
+
+                if (this.isSolved(newSquares)) { this.setState({solved: true});}
+            }
+        }
+
+        canMove(pieceNumber) {
             const neighbours = getNeighbourArray();
-            
-            let current = neighbours[i];
+            let current = neighbours[pieceNumber];
+
             let canMove = false;
-            let moveTo = i;
+            let moveTo = pieceNumber;
 
             for (let j = 0; j < current.length; j++) {
-                if (!this.state.squares[current[j]]) { 
+                if (!this.state.squares[current[j]]) {
                     canMove = true;
                     moveTo = current[j];
                 }
             }
 
-            if (canMove && !this.state.solved) {
-                newSquares[moveTo] = newSquares[i];
-                newSquares[i] = null;
-                this.setState({ squares: newSquares });
+            if (canMove) { return moveTo;} else { return null;}
+        }
 
-                let solvedPieces = 0;
-
-                for (let j = 0; j <= 14; j++) {
-                    if (newSquares[j] === j+1) { solvedPieces++; }
-                }
-
-                if (solvedPieces === 15) { this.setState({solved : true});}
+        isSolved(squares) {
+            let solvedPieces = 0;
+            for (let i = 0; i<=14; i++ ) {
+                if (squares[i] === i+1) { solvedPieces++;}
             }
+
+            if (solvedPieces === 15) { return true; } else { return false;}
         }
 
         render() { 
@@ -73,14 +82,13 @@ class Game extends React.Component {
                     <Board 
                     squares={squares} 
                     onClick={(i) => this.handleClick(i)}
+                    canMove={(i) => this.canMove(i)}
                     />
                     <p className="status-text">{status}</p>
                 </div>
             )
         }
-    
     }
-
 
 class Board extends React.Component {
 
@@ -120,19 +128,17 @@ class Board extends React.Component {
             <Square
                 value={this.props.squares[i]} 
                 onClick={() => this.props.onClick(i)}
+                canMove={this.props.canMove(i)}
             />
         )
     }
 }
 
-
-
-
-
-
 function Square(props) {
+    let clName = "";
+    if (props.canMove != null ) { clName = "board-square move"; } else { clName = "board-square"}
     return (
-       <div className="board-square"  onClick={props.onClick}>
+       <div className={clName}  onClick={props.onClick}>
         {props.value}
         </div>
     );
@@ -158,8 +164,6 @@ function getNeighbourArray() {
         [11,14]
     ];
 }
-
-
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;

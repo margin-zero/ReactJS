@@ -21,6 +21,13 @@
 
     font-size: 36px;
     color: rgba(0,0,0,0.9);
+
+    cursor: normal;
+}
+
+.move {
+    cursor: pointer;
+    background: #e4ece4;
 }
 
 .status-text {
