@@ -39,6 +39,7 @@
 .game-table {
     width: 336px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .game-name {
@@ -46,4 +47,12 @@
     font-weight: normal;
     color: rgba(0,0,0, 0.9);
     text-align: center;
+}
+
+.button-new {
+    font-size: 1.1rem;
+    font-weight: normal;
+    padding: 6px 18px;
+    text-align: center;
+    
 }

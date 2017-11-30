@@ -49,7 +49,6 @@ class Game extends React.Component {
         canMove(pieceNumber) {
             const neighbours = getNeighbourArray();
             let current = neighbours[pieceNumber];
-
             let canMove = false;
             let moveTo = pieceNumber;
 
@@ -72,12 +71,28 @@ class Game extends React.Component {
             if (solvedPieces === 15) { return true; } else { return false;}
         }
 
+
+        startNewGame() {
+           
+            this.setState({ 
+                squares: this.scramble([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,null]),
+                solved: false 
+            });
+
+            return null;
+        }
+
         render() { 
             const squares = this.state.squares;
             var status = "";
-            if (this.state.solved) { status = "Gratulacje - piętnastka ułożona.";}
+            var newGame = null;
+            
+            if (this.state.solved) { 
+                status = "Gratulacje - piętnastka ułożona.";
+                newGame = <button onClick={() => this.startNewGame()} className="button-new">nowa gra</button>;
+                }
             return (
-                <div class="game-table">
+                <div className="game-table">
                     <h1 className="game-name">Piętnastka</h1>
                     <Board 
                     squares={squares} 
@@ -85,6 +100,7 @@ class Game extends React.Component {
                     canMove={(i) => this.canMove(i)}
                     />
                     <p className="status-text">{status}</p>
+                    {newGame}
                 </div>
             )
         }
