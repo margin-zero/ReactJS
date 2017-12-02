@@ -11,7 +11,7 @@ class Game extends React.Component {
                 squares: this.scramble([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,null]),
                 solved: false
             };
-        }
+        };
 
         // scramble() "miesza" planszę przez symulowanie losowych przesunięć klocków.
         // Dzięki temu unikamy sytuacji, w której planszy nie da się ułożyć
