@@ -88,12 +88,12 @@ class Game extends React.Component {
             var newGame = null;
             
             if (this.state.solved) { 
-                status = "Gratulacje - piętnastka ułożona.";
-                newGame = <button onClick={() => this.startNewGame()} className="button-new">nowa gra</button>;
+                status = "Solved! Congratulations!";
+                newGame = <button onClick={() => this.startNewGame()} className="button-new">new game</button>;
                 }
             return (
                 <div className="game-table">
-                    <h1 className="game-name">Piętnastka</h1>
+                    <h1 className="game-name">Game of Fifteen</h1>
                     <Board 
                     squares={squares} 
                     onClick={(i) => this.handleClick(i)}

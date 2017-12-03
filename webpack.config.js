@@ -2,7 +2,7 @@ const HtmlPlugin = require('html-webpack-plugin')
 const Path = require('path')
 
 module.exports = {
-  // Tell webpack to start bundling our app at app/index.js
+  // Tell webpack to start bundling our app at src/index.js
   entry: './src',
   // Output our app to the dist/ directory
   output: {
@@ -30,7 +30,7 @@ module.exports = {
     // Check out https://github.com/jantimon/html-webpack-plugin
     // for the full list of options.
     new HtmlPlugin({
-      template: 'app/index.html'
+      template: 'public/index.html'
     })
   ]
 }

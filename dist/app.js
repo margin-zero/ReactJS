@@ -1072,13 +1072,13 @@ var Game = function (_React$Component) {
             var newGame = null;
 
             if (this.state.solved) {
-                status = "Gratulacje - piętnastka ułożona.";
+                status = "Solved! Congratulations!";
                 newGame = _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
                             return _this2.startNewGame();
                         }, className: 'button-new' },
-                    'nowa gra'
+                    'new game'
                 );
             }
             return _react2.default.createElement(
@@ -1087,7 +1087,7 @@ var Game = function (_React$Component) {
                 _react2.default.createElement(
                     'h1',
                     { className: 'game-name' },
-                    'Pi\u0119tnastka'
+                    'Game of Fifteen'
                 ),
                 _react2.default.createElement(Board, {
                     squares: squares,
