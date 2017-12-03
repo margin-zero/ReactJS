@@ -1,4 +1,4 @@
-The GAME of FIFTEEN
+###The GAME of FIFTEEN
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
