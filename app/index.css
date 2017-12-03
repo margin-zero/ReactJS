@@ -1,0 +1,58 @@
+.board-row {
+    width: 336px;
+    height: 84px;
+}
+
+.board-square {
+
+    background: #e8e8e8;
+    border: solid 2px #999999;
+    border-radius: 8px;
+
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    margin: 2px;
+
+
+    float: left;
+    text-align: center;
+    line-height: 80px;
+
+    font-size: 36px;
+    color: rgba(0,0,0,0.9);
+
+    cursor: normal;
+}
+
+.move {
+    cursor: pointer;
+    background: #e4ece4;
+}
+
+.status-text {
+    text-align: center;
+    font-size: 1.5rem;
+
+}
+
+.game-table {
+    width: 336px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.game-name {
+    font-size: 2rem;
+    font-weight: normal;
+    color: rgba(0,0,0, 0.9);
+    text-align: center;
+}
+
+.button-new {
+    font-size: 1.1rem;
+    font-weight: normal;
+    padding: 6px 18px;
+    text-align: center;
+    
+}
