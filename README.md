@@ -1,8 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Sources for building by react-scripts: ./src and ./public
-Run from terminal: npm run build
-App will build into ./build folder.
+* Sources for building by react-scripts: ./src and ./public
+* Run from terminal: npm run build
+* App will build into ./build folder.
 
 If you prefer to, you can build using Webpack. Sources for Webpack: ./src and ./app
 Run from terminal: npm run wbuild
