@@ -1,3 +1,5 @@
+// Demo Webpack configuration
+
 const HtmlPlugin = require('html-webpack-plugin')
 const Path = require('path')
 
