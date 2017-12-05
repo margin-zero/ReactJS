@@ -26,17 +26,17 @@ module.exports = {
     ]
   },
 
-//  plugins: [
+  plugins: [
     // Extract imported CSS into own file
-//    new ExtractTextPlugin('index.css'),
+    new ExtractTextPlugin('index.css'),
     // Minify JS
-//    new UglifyJsPlugin({
-//      sourceMap: false,
-//      compress: true,
-//    }),
+    new UglifyJsPlugin({
+      sourceMap: false,
+      compress: true,
+    }),
     // Minify CSS
-//    new webpack.LoaderOptionsPlugin({
-//      minimize: true,
-//    }),
-//  ],
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+    }),
+  ],
 }

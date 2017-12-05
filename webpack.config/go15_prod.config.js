@@ -1,38 +1,28 @@
 // Base configuration for app
 
-const prod_base = require('./prod-base.config.js');
-var merge = require('merge'), original, cloned;
+const prod_base = require('./_base_prod.config.js');
 const HtmlPlugin = require('html-webpack-plugin')
 const Path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = merge(prod_base, {
-    entry: './src___game_of_fifteen',
-    output: {
+// entry point of the app ( module.exports.entry )
+const EntryPoint = './src___game_of_fifteen';
+
+// output file configuration ( module.export.output )
+const OutputFile = {
         filename: 'game_of_fifteen.js',
-        path: __dirname + '/../dist___game_of_fifteen'
-      },
-    plugins: [
-        // Configure HtmlPlugin to use our own index.html file
-        // as a template.
-        // Check out https://github.com/jantimon/html-webpack-plugin
-        // for the full list of options.
-        new HtmlPlugin({
-          template: './src___game_of_fifteen/index.html'
-        }),
+        path: __dirname + '/../dist___game_of_fifteen' 
+    };
 
-        // Extract imported CSS into own file
-        new ExtractTextPlugin('index.css'),
-        // Minify JS
-        new UglifyJsPlugin({
-        sourceMap: false,
-        compress: true,
-        }),
-        // Minify CSS
-        new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        }),
-    ]
-})
+// HtmlPlugin.template used by current app - will be added to module.exports.plugins array
+const Plugins = (
+        new HtmlPlugin({
+            template: './src___game_of_fifteen/index.html'
+        })
+    );
+
+
+module.exports = prod_base;
+module.exports.entry = EntryPoint;
+module.exports.output = OutputFile;
+module.exports.plugins.push(Plugins);
