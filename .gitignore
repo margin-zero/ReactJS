@@ -12,6 +12,16 @@
 # gitignore folder
 /gitignore
 
+# ===========================================
+
+# .gitignore files in subfolders
+/*/.gitignore
+
+# /node_modules folders in subfolders
+/*/node_modules
+
+
+# ============================================
 
 # misc
 .DS_Store

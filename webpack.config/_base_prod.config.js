@@ -22,7 +22,11 @@ module.exports = {
             })
         },
 
-        { test: /\.ts$/, use: 'ts-loader'}
+        { 
+          test: /\.ts$/, 
+          use: 'ts-loader'
+        }
+
     ]
   },
 

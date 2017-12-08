@@ -16,9 +16,11 @@ const outputFile = {
 
 // HtmlPlugin.template used by current app - will be added to module.exports.plugins array
 const plugins = (
-        new HtmlPlugin({
-            template: './src___game_of_fifteen/public/index.html'
-        })
+    new HtmlPlugin({
+        template: './src___game_of_fifteen/public/index.html',
+        favicon: './src___game_of_fifteen/public/favicon.ico',
+        title: 'Game of Fifteen'
+    })
     );
 
 
