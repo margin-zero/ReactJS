@@ -17,7 +17,8 @@ const outputFile = {
 // HtmlPlugin.template used by current app - will be added to module.exports.plugins array
 const plugins = (
         new HtmlPlugin({
-            template: './src___game_of_fifteen/public/index.html',
+            // template: './src___game_of_fifteen/public/index.html',
+            filename: __dirname + '/../dist___game_of_fifteen/dev/index.html',
             favicon: './src___game_of_fifteen/public/favicon.ico',
             title: 'Game of Fifteen - DEV DISTRIBUTION'
         })
