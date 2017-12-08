@@ -952,6 +952,8 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 __webpack_require__(27);
 
+__webpack_require__(32);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19107,6 +19109,12 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "manifest.json";
 
 /***/ })
 /******/ ]);

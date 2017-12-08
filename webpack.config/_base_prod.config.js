@@ -25,6 +25,16 @@ module.exports = {
         { 
           test: /\.ts$/, 
           use: 'ts-loader'
+        },
+
+        { 
+          test: /manifest.json/, 
+          use: [
+            { 
+              loader: 'file-loader', 
+              options: { name: '[name].[ext]'}
+            }
+          ]
         }
 
     ]
