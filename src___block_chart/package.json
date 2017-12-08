@@ -12,11 +12,7 @@
     "build": "react-scripts build",
     "wbuild": "webpack --display-error-details",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "build_go15":      "webpack --config webpack.config/go15_dev.config.js",
-    "build_go15_dev":  "webpack --config webpack.config/go15_dev.config.js",
-    "build_go15_prod": "webpack --config webpack.config/go15_prod.config.js",
-    "start_go15": "npm start --prefix ./src___game_of_fifteen"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
