@@ -55,7 +55,6 @@ export default class ChartBody extends React.Component {
 
         return (
             <div>
-            {CHART_COLORS[0]}
             { chartBody }
             </div>
 
