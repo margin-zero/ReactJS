@@ -7,9 +7,11 @@ import BlockChart from './BlockChart';
 
 // =====================================
 
+var root = document.getElementById('root');
+
 ReactDOM.render(
-    <BlockChart />,
-    document.getElementById('root')
+    <BlockChart {...(root.dataset)}/>,
+    root
   );
 
 // ====================================

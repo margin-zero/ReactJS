@@ -20,18 +20,18 @@ export default class BlockChart extends React.Component {
     }
 
     initChart() {
-        var chartHeaderText = this.state.chartHeaderText;
-        var chartDataValues = this.state.chartDataValues;
+        //var chartHeaderText = this.state.chartHeaderText;
+        //var chartDataValues = this.state.chartDataValues;
 
         // init values for chart
-        chartHeaderText = 'default text for header';
-        chartDataValues = [29,45,33,10];
+        // chartHeaderText = this.props.chartheadertext;
+        //chartDataValues = [29,45,33,10];
 
         // set new state
         this.setState(
             { 
-                chartHeaderText: chartHeaderText,
-                chartDataValues: chartDataValues 
+                chartHeaderText: this.props.chartheadertext,
+                chartDataValues: JSON.parse(this.props.chartdatavalues).values
             }
         );
     }
