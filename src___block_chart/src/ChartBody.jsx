@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import { CHART_COLORS } from './ChartColors';
 
 export default class ChartBody extends React.Component {
     
@@ -42,18 +43,19 @@ export default class ChartBody extends React.Component {
             }
 
             blocks.push(
-                <rect x={(leadingSpace + ( i * (blockLength + 1))) + "%"} y={rectY} width={blockLength + "%"} height = { Math.abs(Math.floor(this.props.chartDataValues[i]*heightRatio)) } />
+                <rect x={(leadingSpace + ( i * (blockLength + 1))) + "%"} y={rectY} width={blockLength + "%"} height = { Math.abs(Math.floor(this.props.chartDataValues[i]*heightRatio))} style={{ fill: CHART_COLORS[i % 35] }} />
             )
         }
 
         var chartBody = 
         <svg className="block-chart" style={{width: "100%", height: "201px"}}>
-            <line x1="0" y1={zeroLevel} x2="100" y2={zeroLevel} style={{stroke: "rgba(0,0,0,0.3)"}} />
+            <line x1="0" y1={zeroLevel} x2="100%" y2={zeroLevel} style={{stroke: "rgba(0,0,0,0.3)", strokeWidth: "1px" }} />
                 {blocks}
         </svg>;
 
         return (
             <div>
+            {CHART_COLORS[0]}
             { chartBody }
             </div>
 
