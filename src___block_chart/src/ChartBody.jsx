@@ -4,13 +4,6 @@ import { CHART_COLORS } from './ChartColors';
 
 export default class ChartBody extends React.Component {
     
-    constructor(props) {
-        super(props);
-        this.state = {
-            // {this.props.chartDataValues}
-        };
-    };
-
     render() {
         var blockCount = this.props.chartDataValues.length,
             blockLength =  (100-(blockCount+1)) / blockCount,
@@ -18,7 +11,13 @@ export default class ChartBody extends React.Component {
             minValue = Math.min( ...this.props.chartDataValues ),
             maxValue = Math.max( ...this.props.chartDataValues ),
             heightRatio = (201 / (maxValue - minValue + 1)),
-            zeroLevel = Math.floor(maxValue * heightRatio);
+            zeroLevel = Math.floor(maxValue * heightRatio),
+
+            chartHeader,
+            chartBody,
+            chartLegend = [],
+
+            blocks = [];
 
             if (maxValue >= 0 && minValue >= 0 ) {
                 heightRatio = (201 / maxValue);
@@ -30,9 +29,7 @@ export default class ChartBody extends React.Component {
                 zeroLevel = 0;
             }
 
-        var blocks = [];
-
-        for (var i = 0; i < blockCount; i++ ) {
+        for (let i = 0; i < blockCount; i++ ) {
             let rectY = 0;
 
             if (this.props.chartDataValues[i] > 0 ) {
@@ -43,19 +40,30 @@ export default class ChartBody extends React.Component {
             }
 
             blocks.push(
-                <rect x={(leadingSpace + ( i * (blockLength + 1))) + "%"} y={rectY} width={blockLength + "%"} height = { Math.abs(Math.floor(this.props.chartDataValues[i]*heightRatio))} style={{ fill: CHART_COLORS[i % 35] }} />
+                <rect x={(leadingSpace + ( i * (blockLength + 1))) + "%"} y={rectY} width={blockLength + "%"} height = { Math.abs(Math.floor(this.props.chartDataValues[i]*heightRatio))} style={{ fill: CHART_COLORS[i % CHART_COLORS.length] }} />
+            )
+
+            chartLegend.push(
+                <div className="legend-element">
+                    <div className="legend-element-color" style={{background: CHART_COLORS[i % CHART_COLORS.length] }}></div>
+                    <p className="legend-element-text">{this.props.chartDataLabels[i] + ": ( " + this.props.chartDataValues[i] +" )"}</p>
+                </div>
             )
         }
 
-        var chartBody = 
-        <svg className="block-chart" style={{width: "100%", height: "201px"}}>
-            <line x1="0" y1={zeroLevel} x2="100%" y2={zeroLevel} style={{stroke: "rgba(0,0,0,0.3)", strokeWidth: "1px" }} />
-                {blocks}
-        </svg>;
 
+        chartHeader = <h1 className="block-chart-header">{this.props.chartHeaderText}</h1>;
+        chartBody = 
+            <svg className="block-chart">
+                <line x1="0" y1={zeroLevel} x2="100%" y2={zeroLevel} style={{stroke: "rgba(0,0,0,0.3)", strokeWidth: "1px" }} />
+                    {blocks}
+            </svg>;
+        
         return (
             <div>
+            { chartHeader }
             { chartBody }
+            { chartLegend }
             </div>
 
         )
