@@ -14,13 +14,13 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     
-    "build_go15":      "webpack --config webpack.config/go15_dev.config.js",
-    "build_go15_dev":  "webpack --config webpack.config/go15_dev.config.js",
+    "build_go15":      "webpack --config webpack.config/go15_dev.config.js --display-error-details",
+    "build_go15_dev":  "webpack --config webpack.config/go15_dev.config.js --display-error-details",
     "build_go15_prod": "webpack --config webpack.config/go15_prod.config.js",
     "start_go15":      "npm start --prefix ./src___game_of_fifteen",
 
-    "build_blockchart":      "webpack --config webpack.config/blockchart_dev.config.js",
-    "build_blockchart_dev":  "webpack --config webpack.config/blockchart_dev.config.js",
+    "build_blockchart":      "webpack --config webpack.config/blockchart_dev.config.js --display-error-details",
+    "build_blockchart_dev":  "webpack --config webpack.config/blockchart_dev.config.js --display-error-details",
     "build_blockchart_prod": "webpack --config webpack.config/blockchart_prod.config.js",
     "start_blockchart":      "npm start --prefix ./src___block_chart"
 
