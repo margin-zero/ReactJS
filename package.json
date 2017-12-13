@@ -22,7 +22,12 @@
     "build_blockchart":      "webpack --config webpack.config/blockchart_dev.config.js --display-error-details",
     "build_blockchart_dev":  "webpack --config webpack.config/blockchart_dev.config.js --display-error-details",
     "build_blockchart_prod": "webpack --config webpack.config/blockchart_prod.config.js",
-    "start_blockchart":      "npm start --prefix ./src___block_chart"
+    "start_blockchart":      "npm start --prefix ./src___block_chart",
+
+    "build_dogbrowser":      "webpack --config webpack.config/dogbrowser_dev.config.js --display-error-details",
+    "build_dogbrowser_dev":  "webpack --config webpack.config/dogbrowser_dev.config.js --display-error-details",
+    "build_dogbrowser_prod": "webpack --config webpack.config/dogbrowser_prod.config.js",
+    "start_dogbrowser":      "npm start --prefix ./src___dog_browser"
 
   },
   "devDependencies": {
