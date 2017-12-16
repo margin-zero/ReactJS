@@ -9,7 +9,6 @@ export default class MainBreedSelect extends React.Component {
          };
 
         this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -17,18 +16,10 @@ export default class MainBreedSelect extends React.Component {
         this.props.onMainBreedChange(event.target.value);
     }
 
-    //handleSubmit(event) {
-    //    alert('You selected: ' + this.state.value);
-    //    event.preventDefault();
-    //}
-
 
     render(){
 
         var options = [];
-
-        //var selectedBreed = this.props.selectedBreed;
-
 
         for (let i = 0; i < this.props.mainBreeds.length; i++) {
             options.push(<option key={i} value={this.props.mainBreeds[i]}>{this.props.mainBreeds[i].toUpperCase()}</option>)
@@ -37,7 +28,7 @@ export default class MainBreedSelect extends React.Component {
         return(
 
             <label>
-            Pick dog breed:
+            Pick dog breed:&nbsp;
             <select value={this.props.selectedBreed} onChange={this.handleChange}>
                 {options}
             </select>

@@ -3,20 +3,21 @@ import './index.css';
 
 import MainBreedSelect from './MainBreedSelect';
 import SubBreedSelect  from './SubBreedSelect';
+import ImageBrowser    from './ImageBrowser';
 
-const API = 'https://dog.ceo/api/breeds/list/all';
+const mainBreedsAPI = 'https://dog.ceo/api/breeds/list';
 
 export default class DogBrowser extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            allBreeds: [],
             mainBreeds: [],
             subBreeds: [],
             selectedBreed: '',
             selectedSubBreed: '',
-            imagesAPI: ''
+            imagesAPI: '',
+            images: []
         };
 
         this.handleMainBreedChange = this.handleMainBreedChange.bind(this);
@@ -24,37 +25,25 @@ export default class DogBrowser extends React.Component {
     }
 
     componentDidMount() {
-        fetch(API)
+        fetch(mainBreedsAPI)
             .then(response => response.json())
             .then(data => this.initBreeds(data));
     }
 
+
     initBreeds(data) {
 
-        // UWAGA!!! - zdecydować, czy tablica allBreeds (rasy i pod-rasy) będzie potrzebna.
-        // jeśli nie, to można zmienić sposób generowania tablicy newMainBreeds na znacznie prostszy
-
         var breedArray = Object.entries(data.message),
-            newAllBreeds = [],
             newMainBreeds = [];
 
-        for (let i = 0; i < breedArray.length; i++) {
-
-            let mainBreed = breedArray[i][0];
-
-            newMainBreeds.push(mainBreed);
-
-            if (breedArray[i][1].length > 0) {
-                for (let j = 0; j < breedArray[i][1].length; j++) {
-                    newAllBreeds.push({mainBreed: mainBreed, subBreed: breedArray[i][1][j], displayBreed: breedArray[i][1][j] + ' ' + mainBreed})
-                }
-            } else {
-                newAllBreeds.push({mainBreed: mainBreed, subBreed: null, displayBreed: mainBreed})
+        if (data.status === 'success') {
+            for (let i = 0; i < breedArray.length; i++) {
+                let mainBreed = breedArray[i][1];
+                newMainBreeds.push(mainBreed);
             }
         }
 
         this.setState({ 
-            allBreeds: newAllBreeds, 
             mainBreeds: newMainBreeds,
             selectedBreed: newMainBreeds[0],
         });
@@ -68,9 +57,11 @@ export default class DogBrowser extends React.Component {
         var subBreedsArray = Object.entries(data.message),
             newSelectedSubBreed = '',
             newSubBreeds = [];
-        
-        for (let i = 0; i < subBreedsArray.length; i++) {
-            newSubBreeds.push(subBreedsArray[i][1]);
+
+        if (data.status === 'success') {
+            for (let i = 0; i < subBreedsArray.length; i++) {
+                newSubBreeds.push(subBreedsArray[i][1]);
+            }
         }
 
         if (newSubBreeds.length > 0) { 
@@ -85,12 +76,13 @@ export default class DogBrowser extends React.Component {
             subBreeds: newSubBreeds,
             selectedSubBreed: newSelectedSubBreed
         }, this.generateAPI);
-
     }
+
 
     handleMainBreedChange(newValue) {
         this.setState({selectedBreed: newValue});
 
+        // fetch sub-breeds of new selected mainBreed and init sub-breeds array
         fetch('https://dog.ceo/api/breed/' + newValue + '/list')
             .then(response => response.json())
             .then(data => this.initSubBreeds(data));
@@ -103,6 +95,7 @@ export default class DogBrowser extends React.Component {
         }, this.generateAPI);
     }
 
+
     generateAPI() {
 
         var newAPI= '';
@@ -113,8 +106,29 @@ export default class DogBrowser extends React.Component {
             newAPI = 'https://dog.ceo/api/breed/' + this.state.selectedBreed + '/' + this.state.selectedSubBreed +'/images';
         }
 
-        this.setState({ imagesAPI: newAPI });
+        this.setState({ imagesAPI: newAPI }, this.fetchImages);   
+    }
+
+
+    fetchImages() {
+
+        fetch(this.state.imagesAPI)
+            .then(response => response.json())
+            .then(data => this.generateImagesArray(data));
+    }
+
+    generateImagesArray(data) {
+
+        var imagesArray = Object.entries(data.message),
+            newImages = [];
         
+        if (data.status === 'success') {
+            for (let i = 0; i < imagesArray.length; i++ ) {
+                newImages.push(imagesArray[i][1]);
+            }
+        }
+
+        this.setState({images: newImages});
     }
 
 
@@ -131,22 +145,30 @@ export default class DogBrowser extends React.Component {
         }
         
         return (
-            <div>
-            <p>This is Dog Browser application</p>
-            <p>First breed={this.state.selectedBreed}</p>
-            <p>First subBreed={this.state.selectedSubBreed}</p>
+            <div className="dog-browser-container">
+                <h1 className="app-title">Dog Browser</h1>
 
-            <MainBreedSelect 
-                mainBreeds={this.state.mainBreeds}
-                selectedBreed={this.state.selectedBreed}
-                onMainBreedChange={this.handleMainBreedChange}
-            />
+                <div className="selectors-container">
+                    <div>
+                        <MainBreedSelect 
+                            mainBreeds={this.state.mainBreeds}
+                            selectedBreed={this.state.selectedBreed}
+                            onMainBreedChange={this.handleMainBreedChange}
+                        />
+                    </div>
 
-            {subBreeds}
+                    <div>
+                        {subBreeds}
+                    </div>
+                </div>
 
-            {this.state.subBreeds}
-            <p>{this.state.selectedSubBreed}</p>
-            <p>API: {this.state.imagesAPI}</p>
+
+                <ImageBrowser 
+                    images={this.state.images}
+                    breedName={this.state.selectedSubBreed + ' ' + this.state.selectedBreed}
+                />
+
+                <footer>powered by: <a href="https://dog.ceo/dog-api/">dog-API</a></footer>
             </div>
         )
     }

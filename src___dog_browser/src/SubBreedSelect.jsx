@@ -32,7 +32,7 @@ export default class SubBreedSelect extends React.Component {
         return(
 
             <label>
-            Pick dog sub-breed:
+            Pick dog sub-breed:&nbsp;
             <select value={this.props.selectedSubBreed} onChange={this.handleChange}>
                 {options}
             </select>
