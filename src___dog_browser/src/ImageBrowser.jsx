@@ -26,7 +26,7 @@ export default class ImageBrowser extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.images != nextProps.images) {
+        if (this.props.images !== nextProps.images) {
             this.setState({currentImage: 0});    
         }
         
