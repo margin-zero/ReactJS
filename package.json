@@ -27,7 +27,12 @@
     "build_dogbrowser":      "webpack --config webpack.config/dogbrowser_dev.config.js --display-error-details",
     "build_dogbrowser_dev":  "webpack --config webpack.config/dogbrowser_dev.config.js --display-error-details",
     "build_dogbrowser_prod": "webpack --config webpack.config/dogbrowser_prod.config.js",
-    "start_dogbrowser":      "npm start --prefix ./src___dog_browser"
+    "start_dogbrowser":      "npm start --prefix ./src___dog_browser",
+
+    "build_moneyxc":      "webpack --config webpack.config/moneyxc_dev.config.js --display-error-details",
+    "build_moneyxc_dev":  "webpack --config webpack.config/moneyxc_dev.config.js --display-error-details",
+    "build_moneyxc_prod": "webpack --config webpack.config/moneyxc_prod.config.js",
+    "start_moneyxc":      "npm start --prefix ./src___moneyxc"
 
   },
   "devDependencies": {
