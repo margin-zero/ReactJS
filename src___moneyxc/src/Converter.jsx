@@ -16,7 +16,17 @@ export default class Converter extends React.Component {
             nameTo = this.props.currencyNames[this.props.currencyTo];
 
         return (
-            <p>1 {symbolFrom} ({nameFrom}) = {this.convertMoney(symbolFrom, symbolTo) + ' ' + symbolTo} ({nameTo})</p>
+            <div className="currency-converter">
+                <p className="currency-count">1 <span className="currency-symbol">{symbolFrom}</span></p>
+                <p className="currency-equal">=</p>
+                <p className="currency-count">{this.convertMoney(symbolFrom, symbolTo)} <span className="currency-symbol">{symbolTo}</span></p>
+
+
+                <p className="currency-name">{nameFrom}</p>
+                <p className="currency-space">&nbsp;</p>
+                <p className="currency-name">{nameTo}</p>
+
+            </div>
         )
     }
 }

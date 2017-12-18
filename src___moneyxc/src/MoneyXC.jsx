@@ -70,19 +70,43 @@ export default class MoneyXC extends React.Component {
     render() { 
         
         return (
-            <div>
-                <h1>Money Exchange Rate Calculator</h1>
+            <div className="app-container">
+                <header className="header">
+                    <h1>Foreign Exchange Rates & Currency Conversion</h1>
+                </header>
 
-                <select value={this.state.currencyFrom} onChange={this.handleCurrencyChangeFrom}>
-                    {this.getCurrencyOptions()}
-                </select>
+                <section className="currency-selector">
+                    <label>select 1st currency: 
+                        <select value={this.state.currencyFrom} onChange={this.handleCurrencyChangeFrom}>
+                            {this.getCurrencyOptions()}
+                        </select>
+                    </label>
+                </section>
 
-                <select value={this.state.currencyTo} onChange={this.handleCurrencyChangeTo}>
-                    {this.getCurrencyOptions()}
-                </select>
+                <section className="currency-selector">
+                    <label>select 2nd currency: 
+                        <select value={this.state.currencyTo} onChange={this.handleCurrencyChangeTo}>
+                            {this.getCurrencyOptions()}
+                        </select>
+                    </label>
+                </section>
 
-                {this.getConverter(this.state.currencyFrom, this.state.currencyTo)}
-                {this.getConverter(this.state.currencyTo, this.state.currencyFrom)}
+                <section className="currency-info">
+                    {this.getConverter(this.state.currencyFrom, this.state.currencyTo)}
+                </section>
+
+                <section className="currency-info">
+                    {this.getConverter(this.state.currencyTo, this.state.currencyFrom)}
+                </section>
+
+                <footer>
+                    Foreign exchange rates are based on live data published by&nbsp;
+                    <a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">EUROPEAN CENTRAL BANK</a>.
+                    Current rates were published on {this.state.conversionRates.date}. <br />
+                    This application uses <a href="http://fixer.io">Fixer API</a>.
+
+                </footer>
+
             </div>
             
         )

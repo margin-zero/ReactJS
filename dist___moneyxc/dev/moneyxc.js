@@ -18314,7 +18314,7 @@ exports = module.exports = __webpack_require__(29)(undefined);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "* {\r\n    font-family: 'Open Sans', sans-serif;\r\n}\r\n\r\n.app-container {\r\n    width: 992px;\r\n}\r\n\r\n.app-container>header {\r\n    background: rgba(0,0,0,0.1);\r\n    padding: 20px;\r\n    text-align: center;\r\n}\r\n\r\nh1 {\r\n    margin: 0; padding: 0;\r\n    font-family: 'Montserrat', sans-serif;\r\n    font-size: 2rem;\r\n    font-weight: 600;\r\n    color: rgba(0,0,0,0.85);\r\n}\r\n\r\n.currency-selector {\r\n    padding: 20px;\r\n    background: rgba(0,0,0,0.2);\r\n    display: inline-block;\r\n    box-sizing: border-box;\r\n    width: 50%;\r\n    text-align: center;\r\n    font-weight: normal;\r\n    font-size: 0.8rem;\r\n    color: rgba(0,0,0,0.5);\r\n}\r\n\r\n.currency-selector select {\r\n    margin-left: 0.4rem;\r\n}\r\n\r\n.currency-info {\r\n    width: 100%;\r\n    background: rgba(0,0,0,0.1);\r\n    margin: 0; padding: 0px;\r\n    box-sizing: border-box;\r\n    display: inline-block;\r\n}\r\n\r\n.currency-info>.currency-converter {\r\n    margin: 0; padding: 20px;\r\n}\r\n\r\n.currency-info>.currency-converter>.currency-count {\r\n    font-size: 3rem;\r\n    font-weight: bold;\r\n    margin: 0; padding: 0 4px 0 0;\r\n    width: 48%;\r\n    display: inline-block;\r\n    text-align: right;\r\n    background: rgba(0,0,0,0.05);\r\n    line-height:3rem;\r\n    color: rgba(0,0,0,0.9);\r\n    box-sizing: border-box;\r\n}\r\n\r\n.currency-info>.currency-converter>.currency-count>.currency-symbol {\r\n    color: rgba(255,255,255,0.75);\r\n    font-size: 2.5rem;\r\n}\r\n\r\n.currency-info>.currency-converter>.currency-equal {\r\n    font-size: 3rem;\r\n    font-weight: bold;\r\n    margin: 0; padding: 0;\r\n    width: 4%;\r\n    display: inline-block;\r\n    line-height: 3rem;\r\n    text-align: center;\r\n    color: rgba(0,0,0,0.75);\r\n}\r\n\r\n.currency-info>.currency-converter>.currency-name {\r\n    font-size: 1.5rem;\r\n    margin: 0; padding: 0;\r\n    width: 48%;\r\n    display: inline-block;\r\n    line-height: 2rem;\r\n    text-align: right;\r\n    color: rgba(0,0,0,0.8);\r\n}\r\n\r\n.currency-info>.currency-converter>.currency-space {\r\n    display: inline-block;\r\n    width: 4%;\r\n    line-height: 1rem;\r\n}\r\n\r\n.app-container>footer {\r\n    font-size: 0.8rem;\r\n    color: rgba(0,0,0,0.75);\r\n    padding: 20px;\r\n    text-align: center;\r\n    background: rgba(0,0,0,0.2);\r\n}\r\n\r\n.app-container>footer>a {\r\n    color: #0032ff;\r\n    text-decoration: none;\r\n}\r\n\r\n.app-container>footer>a:hover {\r\n    text-decoration: underline;\r\n}\r\n", ""]);
 
 // exports
 
@@ -18917,9 +18917,12 @@ var MoneyXC = function (_React$Component) {
 
         _this.state = {
             conversionRates: {},
-            currencyFrom: 'RON',
-            currencyTo: 'ILS'
+            currencyFrom: 'EUR',
+            currencyTo: 'EUR'
         };
+
+        _this.handleCurrencyChangeFrom = _this.handleCurrencyChangeFrom.bind(_this);
+        _this.handleCurrencyChangeTo = _this.handleCurrencyChangeTo.bind(_this);
         return _this;
     }
 
@@ -18934,7 +18937,6 @@ var MoneyXC = function (_React$Component) {
                 return _this2.setState({ conversionRates: data }, function () {
                     var newCR = this.state.conversionRates;
                     newCR.rates.EUR = 1;
-                    //newCR.names = CURRENCY_NAMES;
                     this.setState({ conversionRates: newCR });
                 });
             });
@@ -18943,19 +18945,42 @@ var MoneyXC = function (_React$Component) {
         key: 'getConverter',
         value: function getConverter(currencyFrom, currencyTo) {
             if (this.state.conversionRates.rates) {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_Converter2.default, {
-                        conversionRates: this.state.conversionRates,
-                        currencyFrom: currencyFrom,
-                        currencyTo: currencyTo,
-                        currencyNames: _CurrencyNames.CURRENCY_NAMES
-                    })
-                );
+                return _react2.default.createElement(_Converter2.default, {
+                    conversionRates: this.state.conversionRates,
+                    currencyFrom: currencyFrom,
+                    currencyTo: currencyTo,
+                    currencyNames: _CurrencyNames.CURRENCY_NAMES
+                });
+            }
+            return '';
+        }
+    }, {
+        key: 'getCurrencyOptions',
+        value: function getCurrencyOptions() {
+            var options = [],
+                currencyArray = [];
+
+            currencyArray = Object.entries(_CurrencyNames.CURRENCY_NAMES);
+
+            for (var i = 0; i < currencyArray.length; i++) {
+                options.push(_react2.default.createElement(
+                    'option',
+                    { value: currencyArray[i][0] },
+                    currencyArray[i][0] + ' - ' + currencyArray[i][1]
+                ));
             }
 
-            return '';
+            return options;
+        }
+    }, {
+        key: 'handleCurrencyChangeFrom',
+        value: function handleCurrencyChangeFrom(event) {
+            this.setState({ currencyFrom: event.target.value });
+        }
+    }, {
+        key: 'handleCurrencyChangeTo',
+        value: function handleCurrencyChangeTo(event) {
+            this.setState({ currencyTo: event.target.value });
         }
     }, {
         key: 'render',
@@ -18963,14 +18988,75 @@ var MoneyXC = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'app-container' },
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    'Money Exchange Rate Calculator'
+                    'header',
+                    { className: 'header' },
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'Foreign Exchange Rates & Currency Conversion'
+                    )
                 ),
-                this.getConverter(this.state.currencyFrom, this.state.currencyTo),
-                this.getConverter(this.state.currencyTo, this.state.currencyFrom)
+                _react2.default.createElement(
+                    'section',
+                    { className: 'currency-selector' },
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'select 1st currency:',
+                        _react2.default.createElement(
+                            'select',
+                            { value: this.state.currencyFrom, onChange: this.handleCurrencyChangeFrom },
+                            this.getCurrencyOptions()
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'section',
+                    { className: 'currency-selector' },
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'select 2nd currency:',
+                        _react2.default.createElement(
+                            'select',
+                            { value: this.state.currencyTo, onChange: this.handleCurrencyChangeTo },
+                            this.getCurrencyOptions()
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'section',
+                    { className: 'currency-info' },
+                    this.getConverter(this.state.currencyFrom, this.state.currencyTo)
+                ),
+                _react2.default.createElement(
+                    'section',
+                    { className: 'currency-info' },
+                    this.getConverter(this.state.currencyTo, this.state.currencyFrom)
+                ),
+                _react2.default.createElement(
+                    'footer',
+                    null,
+                    'Foreign exchange rates are based on live data published by\xA0',
+                    _react2.default.createElement(
+                        'a',
+                        { href: 'https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html' },
+                        'EUROPEAN CENTRAL BANK'
+                    ),
+                    '. Current rates were published on ',
+                    this.state.conversionRates.date,
+                    '. ',
+                    _react2.default.createElement('br', null),
+                    'This application uses ',
+                    _react2.default.createElement(
+                        'a',
+                        { href: 'http://fixer.io' },
+                        'Fixer API'
+                    ),
+                    '.'
+                )
             );
         }
     }]);
@@ -19015,7 +19101,7 @@ var Converter = function (_React$Component) {
     }
 
     _createClass(Converter, [{
-        key: 'convertMoney',
+        key: "convertMoney",
         value: function convertMoney(currencyFrom, currencyTo) {
             var rateFrom = this.props.conversionRates.rates[currencyFrom],
                 rateTo = this.props.conversionRates.rates[currencyTo];
@@ -19023,7 +19109,7 @@ var Converter = function (_React$Component) {
             return parseInt(rateTo / rateFrom * 100000, 10) / 100000;
         }
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             var symbolFrom = this.props.currencyFrom,
                 nameFrom = this.props.currencyNames[this.props.currencyFrom],
@@ -19031,17 +19117,49 @@ var Converter = function (_React$Component) {
                 nameTo = this.props.currencyNames[this.props.currencyTo];
 
             return _react2.default.createElement(
-                'p',
-                null,
-                '1 ',
-                symbolFrom,
-                ' (',
-                nameFrom,
-                ') = ',
-                this.convertMoney(symbolFrom, symbolTo) + ' ' + symbolTo,
-                ' (',
-                nameTo,
-                ')'
+                "div",
+                { className: "currency-converter" },
+                _react2.default.createElement(
+                    "p",
+                    { className: "currency-count" },
+                    "1 ",
+                    _react2.default.createElement(
+                        "span",
+                        { className: "currency-symbol" },
+                        symbolFrom
+                    )
+                ),
+                _react2.default.createElement(
+                    "p",
+                    { className: "currency-equal" },
+                    "="
+                ),
+                _react2.default.createElement(
+                    "p",
+                    { className: "currency-count" },
+                    this.convertMoney(symbolFrom, symbolTo),
+                    " ",
+                    _react2.default.createElement(
+                        "span",
+                        { className: "currency-symbol" },
+                        symbolTo
+                    )
+                ),
+                _react2.default.createElement(
+                    "p",
+                    { className: "currency-name" },
+                    nameFrom
+                ),
+                _react2.default.createElement(
+                    "p",
+                    { className: "currency-space" },
+                    "\xA0"
+                ),
+                _react2.default.createElement(
+                    "p",
+                    { className: "currency-name" },
+                    nameTo
+                )
             );
         }
     }]);
