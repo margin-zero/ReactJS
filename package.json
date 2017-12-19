@@ -32,7 +32,13 @@
     "build_moneyxc":      "webpack --config webpack.config/moneyxc_dev.config.js --display-error-details",
     "build_moneyxc_dev":  "webpack --config webpack.config/moneyxc_dev.config.js --display-error-details",
     "build_moneyxc_prod": "webpack --config webpack.config/moneyxc_prod.config.js",
-    "start_moneyxc":      "npm start --prefix ./src___moneyxc"
+    "start_moneyxc":      "npm start --prefix ./src___moneyxc",
+
+    "build_bitcoin":      "webpack --config webpack.config/bitcoin_dev.config.js --display-error-details",
+    "build_bitcoin_dev":  "webpack --config webpack.config/bitcoin_dev.config.js --display-error-details",
+    "build_bitcoin_prod": "webpack --config webpack.config/bitcoin_prod.config.js",
+    "start_bitcoin":      "npm start --prefix ./src___bitcoin"
+
 
   },
   "devDependencies": {
