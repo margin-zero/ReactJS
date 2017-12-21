@@ -32,7 +32,7 @@ export default class BitcoinChart extends React.Component {
             maxValue = maxValue + 100;
         }
 
-        unitValue = 201 / (maxValue - minValue);
+        unitValue = 201 / y(maxValue - minValue);
 
 
         for (let i = 1; i < this.props.dataArray.length; i++) {
