@@ -3,12 +3,29 @@
 }
 
 .bitcoin-chart {
-    width: 1200px;
-    height: 201px;
+    width: 1300px;
+    height: 251px;
     display: block;
+    box-sizing: content-box;
+    border: 1px solid lightgreen;
 }
 
 .bitcoin-chart-line {
     stroke: rgba(0,96,255,0.9);
+    stroke-width: 2px;
+}
+
+.chart-line-value {
+    stroke: rgba(0,0,0,0.5);
     stroke-width: 1px;
+}
+
+.chart-line-middle {
+    stroke: rgba(0,0,0,0.3);
+    stroke-width: 1px;
+}
+
+.chart-text {
+    font-size: 10px;
+    color: rgba(0,0,255,0.5);
 }
