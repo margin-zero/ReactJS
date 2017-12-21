@@ -16,23 +16,24 @@ export default class BitcoinChart extends React.Component {
             unitValue,
             coords = {};
 
-        for (let i = 0; i < this.props.dataArray.length - 1; i ++) {
-            if (chartData !== 0) {
+        for (let i = 0; i < this.props.dataArray.length; i ++) {
+            if (chartData[i] > 0) {
                 if (chartData[i] < minValue) { minValue = chartData[i] };
                 if (chartData[i] > maxValue) { maxValue = chartData[i] };
             }
         }
 
-        if (minValue === 0) {
-            minValue = maxValue;
-        }
+        //if (minValue === 0) {
+        //    minValue = maxValue;
+        //}
 
         if (minValue === maxValue) {
             minValue = minValue - 100;
             maxValue = maxValue + 100;
         }
 
-        unitValue = (maxValue - minValue) / 201;
+        unitValue = 201 / (maxValue - minValue);
+
 
         for (let i = 1; i < this.props.dataArray.length; i++) {
             
@@ -56,9 +57,13 @@ export default class BitcoinChart extends React.Component {
             
         }
         
-        chartObject = <svg className="bitcoin-chart">
+        chartObject = 
+            <div>
+            <p>minValue: {minValue} - maxValue: {maxValue} --- unitValue: {unitValue}</p>
+            <svg className="bitcoin-chart">
                 {lines}
-            </svg>;
+            </svg>
+            </div>;
 
         return  chartObject;
 
@@ -70,6 +75,7 @@ export default class BitcoinChart extends React.Component {
             <section>
                 <h1>Bitcoin Chart!</h1>
                 <p>chart for {this.props.currency} :</p>
+                
                 {this.getChart()}
 
             </section>
