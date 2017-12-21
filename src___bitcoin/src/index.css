@@ -29,3 +29,44 @@
     font-size: 10px;
     color: rgba(0,0,255,0.5);
 }
+
+.price-table {
+    border: none;
+    border-collapse: collapse;
+}
+
+.price-table th {
+    background: rgba(0,0,0,0.75);
+    padding: 10px;
+    color: rgba(255,255,255,0.9);
+    font-size: 1rem;
+}
+
+.price-table tbody>tr:nth-child(odd) {
+    background: rgba(0,0,0,0.1);    
+}
+.price-table tbody>tr:nth-child(even) {
+    background: rgba(255,255,255,1);    
+}
+
+.price-table tbody>tr:nth-child(1) {
+    background: rgba(128,128,128,0.4);    
+}
+
+.price-table tbody>tr>td {
+    text-align: right;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.difference-none {
+    color: rgba(0,0,0,0.5);
+}
+
+.difference-positive {
+    color: rgba(0,96,0,1);
+}
+
+.difference-negative {
+    color: rgba(144,0,0,1);
+}

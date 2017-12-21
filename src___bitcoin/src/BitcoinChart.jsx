@@ -116,11 +116,11 @@ export default class BitcoinChart extends React.Component {
                         let isoDate = new Date(x.time.updatedISO);
                         return ({
                         "USD": x.bpi['USD'].rate_float,
-                        "changeUSD": 0,
+                        "changeUSD": '0.0000',
                         "GBP": x.bpi['GBP'].rate_float,
-                        "changeGBP": 0,
+                        "changeGBP": '0.0000',
                         "EUR": x.bpi['EUR'].rate_float,
-                        "changeEUR": 0,
+                        "changeEUR": '0.0000',
                         'updated': isoDate.toLocaleTimeString()
                     })
                 }
@@ -131,14 +131,34 @@ export default class BitcoinChart extends React.Component {
 
         for (let i = chartData.length-1; i >= 0; i--) {
             if (chartData[i]) {
+
+                let differenceClass = 'difference-none';
+
+                if (chartData[i-1]) {
+                    let differenceUSD = chartData[i].USD - chartData[i-1].USD,
+                        differenceGBP = chartData[i].GBP - chartData[i-1].GBP,
+                        differenceEUR = chartData[i].EUR - chartData[i-1].EUR;
+
+                    chartData[i].changeUSD = (differenceUSD).toFixed(4) + ' (' + ((differenceUSD / chartData[i-1].USD) * 100).toFixed(4) + '%)';
+                    chartData[i].changeGBP = (differenceGBP).toFixed(4) + ' (' + ((differenceGBP / chartData[i-1].USD) * 100).toFixed(4) + '%)';
+                    chartData[i].changeEUR = (differenceEUR).toFixed(4) + ' (' + ((differenceEUR / chartData[i-1].USD) * 100).toFixed(4) + '%)';
+
+                    if ( differenceUSD > 0 ) { 
+                        differenceClass = 'difference-positive';
+                    } else {
+                        differenceClass = 'difference-negative';
+                    }
+                }
+
+                
                 lines.push(
                     <tr>
-                        <td>{chartData[i].USD}</td>
-                        <td>{chartData[i].changeUSD}</td>
-                        <td>{chartData[i].GBP}</td>
-                        <td>{chartData[i].changeGBP}</td>
-                        <td>{chartData[i].EUR}</td>
-                        <td>{chartData[i].changeEUR}</td>
+                        <td>{chartData[i].USD.toFixed(4)}</td>
+                        <td className={differenceClass}>{chartData[i].changeUSD}</td>
+                        <td>{chartData[i].GBP.toFixed(4)}</td>
+                        <td className={differenceClass}>{chartData[i].changeGBP}</td>
+                        <td>{chartData[i].EUR.toFixed(4)}</td>
+                        <td className={differenceClass}>{chartData[i].changeEUR}</td>
                         <td>{chartData[i].updated}</td>
                     </tr>
                 )
