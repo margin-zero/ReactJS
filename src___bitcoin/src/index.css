@@ -35,6 +35,23 @@
     text-decoration: underline;
 }
 
+.app-container>footer {
+    margin: 20px 0 0 0;
+    padding: 20px;
+    background: rgba(0,0,0,0.2);
+    font-size: 0.9rem;
+}
+
+.app-container>footer>a {
+    color: #0033ff;
+    text-decoration: none;
+}
+
+.app-container>footer>a:hover {
+    text-decoration: underline;
+}
+
+
 .bitcoin-chart-container {
     margin: 0;
     padding: 0;
@@ -52,7 +69,8 @@
     display: block;
     box-sizing: content-box;
     background: #fff;
-    margin: 0px 0px 20px 0px;
+
+    margin: 0;
 }
 
 .bitcoin-chart-line {
