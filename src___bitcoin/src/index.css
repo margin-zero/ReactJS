@@ -8,13 +8,51 @@
     padding: 0;
 }
 
+
+.app-container>header {
+    padding: 20px;
+    background: rgba(0,0,0,0.2);
+}
+.app-container>header>h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.8rem;
+}
+
+.app-container>header>p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+    color: rgba(0,0,0,0.6);
+}
+
+.app-container>header>p>a {
+    color: #0033ff;
+    text-decoration: none;
+}
+
+.app-container>header>p>a:hover {
+    text-decoration: underline;
+}
+
+.bitcoin-chart-container {
+    margin: 0;
+    padding: 0;
+}
+
+.bitcoin-chart-container>h1 {
+    margin: 0;
+    padding: 20px 20px 0px 0px;
+    font-size: 1rem;
+}
+
 .bitcoin-chart {
     width: 1250px;
     height: 241px;
     display: block;
     box-sizing: content-box;
     background: #fff;
-    sborder: 1px solid lightgreen;
+    margin: 0px 0px 20px 0px;
 }
 
 .bitcoin-chart-line {

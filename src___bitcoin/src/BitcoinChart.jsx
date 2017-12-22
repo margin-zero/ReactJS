@@ -67,11 +67,10 @@ export default class BitcoinChart extends React.Component {
         // ostatecznie generujemy obiekt JSX wykresu, który będzie zwrócony przez naszą funkcję
         chartObject = 
             <div>
-            <p>minValue: {minValue} - maxValue: {maxValue} --- unitValue: {unitValue}</p>
-            <svg className="bitcoin-chart">
-                {this.drawChartLines(minValue, maxValue, chartData, chartDataTime)}
-                {lines}
-            </svg>
+                <svg className="bitcoin-chart">
+                    {this.drawChartLines(minValue, maxValue, chartData, chartDataTime)}
+                    {lines}
+                </svg>
             </div>;
 
         return  chartObject;
@@ -83,7 +82,7 @@ export default class BitcoinChart extends React.Component {
 
         lines.push( <line x1={0} x2={1200} y1={201} y2={201} className="chart-line-value" /> );
         lines.push( <line x1={0} x2={1200} y1={0} y2={0} className="chart-line-value" /> );
-        lines.push( <line x1={0} x2={0} y1={0} y2={201} className="chart-line-value" /> );
+        lines.push( <line x1={1} x2={1} y1={0} y2={201} className="chart-line-value" /> );
         lines.push( <line x1={1180} x2={1180} y1={0} y2={201} className="chart-line-value" /> );
         lines.push( <line stroke-dasharray="5, 10" x1="0" y1="100" x2="1200" y2="100" className="chart-line-middle" /> );
 
@@ -195,13 +194,11 @@ export default class BitcoinChart extends React.Component {
 
     render() {
         return (
-            <section>
-                <h1>Bitcoin Chart!</h1>
-                <p>chart for {this.props.currency} :</p>
-                
-                {this.getChart()}
+            <section className="bitcoin-chart-container">
 
-                {this.getPriceTable()}
+                <h1>Bitcoin ({this.props.currency}) Chart</h1>
+                {this.getChart()}
+                <p>this.getPriceTable()</p>
             </section>
         )
     }
