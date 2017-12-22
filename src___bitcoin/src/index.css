@@ -70,3 +70,7 @@
 .difference-negative {
     color: rgba(144,0,0,1);
 }
+
+.empty-cell {
+    width: 40px;
+}

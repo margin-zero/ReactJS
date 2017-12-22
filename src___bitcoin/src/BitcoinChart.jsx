@@ -155,10 +155,13 @@ export default class BitcoinChart extends React.Component {
                     <tr>
                         <td>{chartData[i].USD.toFixed(4)}</td>
                         <td className={differenceClass}>{chartData[i].changeUSD}</td>
+                        <td className='empty-cell'>&nbsp;</td>
                         <td>{chartData[i].GBP.toFixed(4)}</td>
                         <td className={differenceClass}>{chartData[i].changeGBP}</td>
+                        <td className='empty-cell'>&nbsp;</td>
                         <td>{chartData[i].EUR.toFixed(4)}</td>
                         <td className={differenceClass}>{chartData[i].changeEUR}</td>
+                        <td className='empty-cell'>&nbsp;</td>
                         <td>{chartData[i].updated}</td>
                     </tr>
                 )
@@ -171,10 +174,13 @@ export default class BitcoinChart extends React.Component {
                     <tr>
                         <th>price USD</th>
                         <th>change USD</th>
+                        <th>&nbsp;</th>
                         <th>price GBP</th>
                         <th>change GBP</th>
+                        <th>&nbsp;</th>
                         <th>price EUR</th>
                         <th>change EUR</th>
+                        <th>&nbsp;</th>
                         <th>prices updated:</th>
                     </tr>
                 </thead>
