@@ -121,7 +121,7 @@ export default class BitcoinChart extends React.Component {
                         "changeGBP": '0.0000',
                         "EUR": x.bpi['EUR'].rate_float,
                         "changeEUR": '0.0000',
-                        'updated': isoDate.toLocaleTimeString()
+                        'updated': isoDate.toLocaleDateString() + ' - ' + isoDate.toLocaleTimeString()
                     })
                 }
                 return null;
