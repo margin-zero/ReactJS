@@ -46,7 +46,7 @@ export default class BitcoinChart extends React.Component {
         // generujemy kolejne linie na wykresie
         for (let i = 1; i < this.props.dataArray.length; i++) {
             
-            if (chartData[i]) {
+            if ((chartData[i] && chartData[i-1]) || (chartData[i] && ( i === this.props.dataArray.length-1))) {
                 // wyznaczamy współrzędne x początku i końca linii
                 coords.x1 = (i-1) * 20;
                 coords.x2 = i * 20;
