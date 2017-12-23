@@ -46,26 +46,28 @@ export default class BitcoinChart extends React.Component {
         // generujemy kolejne linie na wykresie
         for (let i = 1; i < this.props.dataArray.length; i++) {
             
-            // wyznaczamy współrzędne x początku i końca linii
-            coords.x1 = (i-1) * 20;
-            coords.x2 = i * 20;
+            if (chartData[i]) {
+                // wyznaczamy współrzędne x początku i końca linii
+                coords.x1 = (i-1) * 20;
+                coords.x2 = i * 20;
 
-            // ustalamy współrzędną y końca poprzedniej linii
-            if (chartData[i-1] > 0) {
-                coords.y1 = ((maxValue - chartData[i-1]) * unitValue).toString();
-            } else {
-                coords.y1 = 201;
+                // ustalamy współrzędną y końca poprzedniej linii
+                if (chartData[i-1] > 0) {
+                    coords.y1 = ((maxValue - chartData[i-1]) * unitValue).toString();
+                } else {
+                    coords.y1 = 201;
+                }
+
+                // ustalamy współrzędną y końca aktualnej linii
+                if (chartData[i] > 0) {
+                    coords.y2 = ((maxValue - chartData[i]) * unitValue).toString();
+                } else {
+                    coords.y2 = 201;
+                }
+
+                // dodajemy linię do tablicy lines[]
+                lines.push(<line key={i} className="bitcoin-chart-line" {...coords} /> );
             }
-
-            // ustalamy współrzędną y końca aktualnej linii
-            if (chartData[i] > 0) {
-                coords.y2 = ((maxValue - chartData[i]) * unitValue).toString();
-            } else {
-                coords.y2 = 201;
-            }
-
-            // dodajemy linię do tablicy lines[]
-            lines.push(<line key={i} className="bitcoin-chart-line" {...coords} /> );
         }
         
         // ostatecznie generujemy obiekt JSX wykresu, który będzie zwrócony przez naszą funkcję

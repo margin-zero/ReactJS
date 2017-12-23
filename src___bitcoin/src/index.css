@@ -53,13 +53,13 @@
 
 
 .bitcoin-chart-container {
-    margin: 0;
+    margin: 10px 0 0 0;
     padding: 0;
 }
 
 .bitcoin-chart-container>h1 {
     margin: 0;
-    padding: 20px 20px 0px 0px;
+    padding: 0;
     font-size: 1rem;
 }
 
@@ -70,7 +70,7 @@
     box-sizing: content-box;
     background: #fff;
 
-    margin: 0;
+    margin: 4px 0 0 0;
 }
 
 .bitcoin-chart-line {
@@ -97,6 +97,7 @@
     border: none;
     border-collapse: collapse;
     width: 100%;
+    margin: 10px 0 0 0;
 }
 
 .price-table th {

@@ -12,8 +12,8 @@ export default class Bitcoin extends React.Component {
             dataArray: [],
             showChart: {
                 'USD': true,
-                'GBP': true,
-                'EUR': true
+                'GBP': false,
+                'EUR': false
             }
         };
 
